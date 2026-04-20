@@ -1,0 +1,1 @@
+{"name": "Discord PWA","short_name": "Discord","description": "Discord - Your Place to Talk","start_url": "/","display": "standalone","scope": "/","background_color": "#313338","theme_color": "#5865F2","icons": [{"src": "icon-192.png","sizes": "192x192","type": "image/png","purpose": "any maskable"}]}
