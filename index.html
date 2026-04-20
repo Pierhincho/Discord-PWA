@@ -44,14 +44,32 @@
         <p>3. Launch from your home screen!</p>
     </div>
 
-    <script>
-        // Check if we're in the PWA container
-        if (window.navigator.standalone === true) {
-            // Hide setup UI
-            document.getElementById('ui').style.display = 'none';
-            // Force jump to Discord
-            window.location.replace("https://discord.com/app");
+<script>
+    (function(document,navigator,standalone) {
+        // Only run this if we are in the Home Screen app
+        if ((standalone in navigator) && navigator[standalone]) {
+            
+            // 1. Initial Redirect
+            // We use replace() so the user can't "go back" to the setup screen
+            if (window.location.hostname !== 'discord.com') {
+                window.location.replace("https://discord.com/app");
+            }
+
+            // 2. The "Bar Killer" Script
+            // This prevents the browser UI from popping up when the page changes
+            var curnode, location=document.location, stop=/^(a|html)$/i;
+            document.addEventListener('click', function(e) {
+                curnode=e.target;
+                while (!(stop).test(curnode.nodeName)) {
+                    curnode=curnode.parentNode;
+                }
+                if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) )) {
+                    e.preventDefault();
+                    location.href = curnode.href;
+                }
+            },false);
         }
-    </script>
+    })(document,window.navigator,'standalone');
+</script>
 </body>
 </html>
