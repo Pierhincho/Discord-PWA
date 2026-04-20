@@ -2,13 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Discord PWA</title>
-    <meta http-equiv="refresh" content="0;url=https://discord.com/app">
-    <link rel="manifest" href="/manifest.json">
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Discord">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #313338;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 { margin-bottom: 10px; }
+        p { color: #dbdee1; line-height: 1.5; }
+        .instructions {
+            background: #2b2d31;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #4e5058;
+        }
+        .icon-tip {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Redirecting to Discord App</h1>
-    <p>If you are not redirected, <a href="https://discord.com/app">click here</a>.</p>
+
+    <div class="instructions">
+        <h2>Setup Instructions</h2>
+        <p>To hide the Safari bars, you must add this to your home screen:</p>
+        <p>1. Tap the <strong>Share</strong> button <br>(the box with the upward arrow).</p>
+        <p>2. Scroll down and tap <br><strong>"Add to Home Screen"</strong>.</p>
+        <p>3. Open the new <strong>Discord icon</strong> <br>from your home screen!</p>
+    </div>
+
+    <div class="icon-tip">📲</div>
+
+    <script>
+        // 1. SMART REDIRECT:
+        // Only automatically jumps to Discord if the app is 
+        // ALREADY opened from the Home Screen (Standalone Mode).
+        if (window.navigator.standalone === true) {
+            window.location.href = "https://discord.com/app";
+        }
+
+        // 2. STAY IN APP SCRIPT:
+        // Prevents internal links from popping back into the Safari Browser UI.
+        (function(document,navigator,standalone) {
+            if ((standalone in navigator) && navigator[standalone]) {
+                var curnode, location=document.location, stop=/^(a|html)$/i;
+                document.addEventListener('click', function(e) {
+                    curnode=e.target;
+                    while (!(stop).test(curnode.nodeName)) {
+                        curnode=curnode.parentNode;
+                    }
+                    if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) )) {
+                        e.preventDefault();
+                        location.href = curnode.href;
+                    }
+                },false);
+            }
+        })(document,window.navigator,'standalone');
+    </script>
 </body>
 </html>
