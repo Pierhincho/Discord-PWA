@@ -1,7 +1,7 @@
 {
   "name": "Discord",
   "short_name": "Discord",
-  "description": "Discord PWA",
+  "description": "Discord Full Screen PWA",
   "start_url": "./index.html",
   "display": "standalone",
   "scope": "./",
@@ -9,9 +9,9 @@
   "theme_color": "#313338",
   "icons": [
     {
-      "src": "icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512",
+      "src": "icon-192.webp",
+      "type": "image/webp",
+      "sizes": "192x192",
       "purpose": "any maskable"
     }
   ]
