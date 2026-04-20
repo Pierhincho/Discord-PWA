@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Discord</title>
 
     <link rel="manifest" href="manifest.json">
@@ -10,66 +10,24 @@
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Discord">
+
+    <script>
+        // iOS 26 checks for standalone status immediately
+        if (window.navigator.standalone) {
+            // We use a direct window.top location to try and "hijack" the frame
+            window.top.location.replace("https://discord.com/app");
+        }
+    </script>
 
     <style>
-        body {
-            margin: 0;
-            background-color: #313338;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            font-family: -apple-system, sans-serif;
-            text-align: center;
-        }
-        .setup-card {
-            background: #2b2d31;
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid #4e5058;
-            max-width: 85%;
-        }
-        h2 { color: #5865f2; margin-top: 0; }
-        p { color: #dbdee1; line-height: 1.6; font-size: 1.1rem; }
+        body { margin: 0; background: #313338; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .card { padding: 30px; border-radius: 20px; background: #2b2d31; text-align: center; border: 1px solid #4e5058; }
     </style>
 </head>
 <body>
-
-    <div id="ui" class="setup-card">
-        <h2>PWA Setup</h2>
-        <p>1. Tap <strong>Share</strong> (box with arrow)</p>
-        <p>2. Tap <strong>Add to Home Screen</strong></p>
-        <p>3. Launch from your home screen!</p>
+    <div class="card">
+        <h2>Discord PWA</h2>
+        <p>Share > Add to Home Screen</p>
     </div>
-
-<script>
-    (function(document,navigator,standalone) {
-        // Only run this if we are in the Home Screen app
-        if ((standalone in navigator) && navigator[standalone]) {
-            
-            // 1. Initial Redirect
-            // We use replace() so the user can't "go back" to the setup screen
-            if (window.location.hostname !== 'discord.com') {
-                window.location.replace("https://discord.com/app");
-            }
-
-            // 2. The "Bar Killer" Script
-            // This prevents the browser UI from popping up when the page changes
-            var curnode, location=document.location, stop=/^(a|html)$/i;
-            document.addEventListener('click', function(e) {
-                curnode=e.target;
-                while (!(stop).test(curnode.nodeName)) {
-                    curnode=curnode.parentNode;
-                }
-                if('href' in curnode && ( curnode.href.indexOf('http') || ~curnode.href.indexOf(location.host) )) {
-                    e.preventDefault();
-                    location.href = curnode.href;
-                }
-            },false);
-        }
-    })(document,window.navigator,'standalone');
-</script>
 </body>
 </html>
