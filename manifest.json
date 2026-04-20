@@ -1,12 +1,9 @@
 {
   "name": "Discord",
   "short_name": "Discord",
-  "start_url": "https://discord.com/app",
+  "start_url": "https://discord.com/login",
   "display": "standalone",
-  "display_override": ["standalone", "fullscreen"],
-  "scope": "/",
-  "background_color": "#313338",
-  "theme_color": "#313338",
+  "scope": "https://discord.com/",
   "icons": [
     {
       "src": "icon-192.webp",
