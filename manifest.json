@@ -1,12 +1,11 @@
 {
   "name": "Discord",
   "short_name": "Discord",
-  "description": "Discord Full Screen PWA",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "display": "standalone",
-  "scope": "./",
   "background_color": "#313338",
   "theme_color": "#313338",
+  "scope": "./",
   "icons": [
     {
       "src": "icon-192.webp",
