@@ -1,17 +1,17 @@
 {
-  "name": "Discord PWA",
+  "name": "Discord",
   "short_name": "Discord",
-  "description": "Discord - Your Place to Talk",
+  "description": "Discord PWA",
   "start_url": "./index.html",
   "display": "standalone",
   "scope": "./",
   "background_color": "#313338",
-  "theme_color": "#5865F2",
+  "theme_color": "#313338",
   "icons": [
     {
-      "src": "icon-512.webp",
+      "src": "icon-512.png",
+      "type": "image/png",
       "sizes": "512x512",
-      "type": "image/webp",
       "purpose": "any maskable"
     }
   ]
