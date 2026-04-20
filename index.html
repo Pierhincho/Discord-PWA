@@ -6,7 +6,6 @@
     <title>Discord</title>
 
     <link rel="manifest" href="manifest.json">
-    
     <link rel="apple-touch-icon" href="icon-192.webp">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,7 +17,6 @@
             margin: 0;
             background-color: #313338;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -26,34 +24,32 @@
             font-family: -apple-system, sans-serif;
             text-align: center;
         }
-        .container {
+        .setup-card {
             background: #2b2d31;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 40px;
+            border-radius: 24px;
             border: 1px solid #4e5058;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            max-width: 80%;
+            max-width: 85%;
         }
-        h2 { color: #5865F2; margin-top: 0; }
-        p { color: #dbdee1; font-size: 1.1rem; line-height: 1.4; }
+        h2 { color: #5865f2; margin-top: 0; }
+        p { color: #dbdee1; line-height: 1.6; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-    <div id="setup-screen" class="container">
+    <div id="ui" class="setup-card">
         <h2>PWA Setup</h2>
-        <p>1. Tap the <strong>Share</strong> button</p>
-        <p>2. Select <strong>Add to Home Screen</strong></p>
-        <p>3. Open the icon from your Home Screen for full-screen!</p>
+        <p>1. Tap <strong>Share</strong> (box with arrow)</p>
+        <p>2. Tap <strong>Add to Home Screen</strong></p>
+        <p>3. Launch from your home screen!</p>
     </div>
 
     <script>
-        // Check if we are running as a standalone app
+        // Check if we're in the PWA container
         if (window.navigator.standalone === true) {
-            // Hide the instructions so they don't flash
-            document.getElementById('setup-screen').style.display = 'none';
-            
-            // Redirect to the actual Discord App
+            // Hide setup UI
+            document.getElementById('ui').style.display = 'none';
+            // Force jump to Discord
             window.location.replace("https://discord.com/app");
         }
     </script>
